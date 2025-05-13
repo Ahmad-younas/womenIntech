@@ -1,103 +1,97 @@
 import Image from "next/image";
+import Link from "next/link";
+import Header from "@/components/Header";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  // Countdown timer values
+  const days = 9;
+  const hours = 6;
+  const minutes = 5;
+  const seconds = 45;
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <main className="flex flex-col min-h-screen">
+      <Header activePage="home" />
+      
+      {/* Early bird ticket banner */}
+      <div className="flex justify-center items-center bg-[#4eb1ba] text-white p-4">
+        <div className="flex flex-col items-center bg-[#4e2a5a] p-4 rounded mr-4">
+          <div className="text-sm">DON'T</div>
+          <div className="text-sm">MISS!</div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        
+        <div className="flex items-center">
+          <div className="mr-4">
+            <div className="flex items-center">
+              <span className="text-yellow-400 text-xl mr-2">🔥</span>
+              <span className="text-xl font-bold">Get Your Global Conference</span>
+            </div>
+            <div className="text-xl font-bold">Regular Bird Ticket! Save up 35%!</div>
+          </div>
+          
+          {/* Countdown timer */}
+          <div className="flex space-x-2 mx-4">
+            <div className="bg-teal-500 text-white p-2 rounded text-center w-12">
+              <div className="text-xl">{days}</div>
+              <div className="text-xs">Days</div>
+            </div>
+            <div className="bg-teal-500 text-white p-2 rounded text-center w-12">
+              <div className="text-xl">{hours}</div>
+              <div className="text-xs">Hours</div>
+            </div>
+            <div className="bg-teal-500 text-white p-2 rounded text-center w-12">
+              <div className="text-xl">{minutes}</div>
+              <div className="text-xs">Minutes</div>
+            </div>
+            <div className="bg-teal-500 text-white p-2 rounded text-center w-12">
+              <div className="text-xl">{seconds}</div>
+              <div className="text-xs">Seconds</div>
+            </div>
+          </div>
+          
+          <button className="bg-teal-500 text-white px-4 py-2 rounded mr-2">Buy Now</button>
+          <button className="bg-white text-[#4e2a5a] px-2 py-2 rounded">✕</button>
+        </div>
+      </div>
+      
+      {/* Hero section */}
+      <div className="flex flex-col items-center justify-center text-center py-16 bg-gradient-to-br from-[#4e2a5a] to-[#271530] text-white min-h-[500px] relative overflow-hidden">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-10" style={{ 
+          backgroundImage: 'linear-gradient(45deg, #4eb1ba 25%, transparent 25%), linear-gradient(-45deg, #4eb1ba 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #4eb1ba 75%), linear-gradient(-45deg, transparent 75%, #4eb1ba 75%)',
+          backgroundSize: '20px 20px',
+          backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
+        }}></div>
+        
+        <div className="bg-[#4e2a5a]/80 p-4 rounded mb-8 z-10">
+          <h2 className="text-xl mb-1">Women in Tech</h2>
+          <div className="text-sm bg-[#4eb1ba] inline-block px-2 py-1 rounded">GLOBAL CONFERENCE 2025</div>
+        </div>
+        
+        <h1 className="text-5xl font-bold mb-4 z-10">
+          WOMEN IN TECH<br />
+          <span className="text-4xl">GLOBAL CONFERENCE<sup>®</sup> 2025</span>
+        </h1>
+        
+        <div className="text-2xl font-light mb-4 z-10">
+          MAY 20-22
+        </div>
+        
+        <p className="text-xl mb-8 z-10">
+          Unite 100,000 Women in Tech to Foster Innovation with Purpose and Impact
+        </p>
+        
+        <div className="flex space-x-6 mb-10 z-10">
+          <Image src="/chief-in-tech.svg" alt="Chief in Tech Summit" width={150} height={60} className="h-12 w-auto" />
+          <Image src="/key-tech.svg" alt="Key Tech Summit" width={150} height={60} className="h-12 w-auto" />
+          <Image src="/career-growth.svg" alt="Career Growth Summit" width={150} height={60} className="h-12 w-auto" />
+          <Image src="/global-esg.svg" alt="Global ESG Impact Summit" width={150} height={60} className="h-12 w-auto" />
+        </div>
+        
+        <button className="bg-[#4eb1ba] text-white px-6 py-3 rounded z-10">
+          Conference Overview
+        </button>
+      </div>
+    </main>
   );
 }

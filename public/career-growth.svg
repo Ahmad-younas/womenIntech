@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="300" height="100">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4e2a5a" />
+      <stop offset="100%" stop-color="#4eb1ba" />
+    </linearGradient>
+  </defs>
+  <rect width="300" height="100" rx="10" fill="url(#gradient)" opacity="0.9"/>
+  <text x="25" y="45" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="white">CAREER GROWTH</text>
+  <text x="65" y="75" font-family="Arial, sans-serif" font-size="18" fill="white">SUMMIT 2025</text>
+</svg> 
