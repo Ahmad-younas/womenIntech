@@ -1,4 +1,6 @@
-import { } from "next-auth/jwt";
+/* eslint-disable */
+
+import {JWT } from "next-auth/jwt";
 
 declare module "next-auth" {
   /**
@@ -26,12 +28,12 @@ declare module "next-auth" {
   }
 }
 
-// declare module "next-auth/jwt" {
-//   /**
-//    * Extend the built-in JWT token interface with custom fields
-//    */
-//   interface JWT {
-//     userId: string;
-//     role: string;
-//   }
-// } 
+declare module "next-auth/jwt" {
+  /**
+   * Extend the built-in JWT token interface with custom fields
+   */
+  interface JWT {
+    userId: string;
+    role: string;
+  }
+} 
