@@ -14,26 +14,11 @@ interface UserRegistrationData {
   email: string;
   password: string;
   confirmPassword: string;
-  agreeTerms: boolean;
-  bio: string;
-  profileImage?: string;
-  organization: string;
-  title: string;
-  phone: string;
-  country: string;
 }
 
-interface Country {
-  cca2: string;
-  name: {
-    common: string;
-  };
-}
 
 export default function Register() {
   const router = useRouter();
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [profileImage, setProfileImage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -115,22 +100,11 @@ export default function Register() {
         email: formData.email,
         password: formData.password,
         confirmPassword: formData.confirmPassword,
-        agreeTerms: formData.agreeTerms,
-        bio: formData.bio,
-        organization: formData.organization,
-        title: formData.title,
-        phone: formData.phone,
-        country: formData.country,
-        profileImage: profileImage || undefined
       };
 
-      // Upload profile image if one exists
-      if (profileImage) {
-        registrationData.profileImage = profileImage;
-      }
 
 
-      const { data: existingUser, error: signInError } = await supabase.auth.signInWithPassword({
+      const { data: existingUser } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
       });

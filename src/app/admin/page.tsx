@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import AdminProtectedRoute from "../../components/AdminProtectedRoute";
 import { supabase } from "@/lib/supabase";
-
+import Image from "next/image";
 // Mock data for demonstration
 type UserProfile = {
   id: string;
@@ -77,7 +77,7 @@ export default function AdminDashboard() {
       setSelectedUser({ ...selectedUser, status: "approved" });
     }
     try {
-      const response = await fetch("/api/send-approval-email", {
+      await fetch("/api/send-approval-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: user.email, first_name: user.first_name }),
@@ -193,7 +193,7 @@ export default function AdminDashboard() {
                       >
                         <div className="flex items-center space-x-3">
                           <div className="flex-shrink-0 h-10 w-10">
-                            <img
+                            <Image
                               className="h-10 w-10 rounded-full object-cover"
                               src={user.profile_image}
                               alt={`${user.first_name} ${user.last_name}`}
@@ -248,7 +248,7 @@ export default function AdminDashboard() {
                     <div className="p-6">
                       <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-6">
                         <div className="flex-shrink-0">
-                          <img
+                          <Image
                             className="h-32 w-32 rounded-full object-cover border-4 border-[#4eb1ba]/20"
                             src={selectedUser.profile_image}
                             alt={`${selectedUser.first_name} ${selectedUser.last_name}`}

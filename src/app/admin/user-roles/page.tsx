@@ -78,7 +78,6 @@ export default function UserRolesAdmin() {
   async function fixDatabase() {
     try {
       setFixStatus("Attempting to fix database schema...");
-
       // Try to call the create_user_roles_table function
       const { error } = await supabase.rpc('create_user_roles_table');
 

@@ -18,18 +18,18 @@ export default function ForgotPassword() {
   return (
     <main className="flex flex-col min-h-screen">
       <Header />
-      
+
       {/* Forgot Password Form Section */}
       <div className="flex flex-col items-center justify-center bg-gray-50 py-16 px-4 flex-grow">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full border border-gray-200">
           <h1 className="text-3xl font-bold text-[#4e2a5a] mb-6 text-center">Reset Password</h1>
-          
+
           {!submitted ? (
             <>
               <p className="text-center text-gray-600 mb-6">
-                Enter your email address and we'll send you a link to reset your password.
+                Enter your email address and we&apos;ll send you a link to reset your password.
               </p>
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
@@ -47,7 +47,7 @@ export default function ForgotPassword() {
                     placeholder="Enter your email"
                   />
                 </div>
-                
+
                 <div>
                   <button
                     type="submit"
@@ -68,13 +68,13 @@ export default function ForgotPassword() {
               <h3 className="text-lg leading-6 font-medium text-gray-900">Check your email</h3>
               <div className="mt-2">
                 <p className="text-sm text-gray-500">
-                  We've sent a password reset link to <span className="font-medium">{email}</span>.
+                  We&apos;ve sent a password reset link to <span className="font-medium">{email}</span>.
                   Please check your inbox and spam folder.
                 </p>
               </div>
             </div>
           )}
-          
+
           <div className="mt-6 text-center">
             <Link href="/login" className="text-sm font-medium text-[#4eb1ba] hover:text-[#4e2a5a]">
               Return to login

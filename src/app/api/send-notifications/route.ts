@@ -19,7 +19,7 @@ export async function POST(req: Request) {
 
   try {
     // Send email to user
-    const userMail = await transporter.sendMail({
+    await transporter.sendMail({
       from: `"Your App" <${process.env.SMTP_USER}>`,
       to: userEmail,
       subject: "Thanks for registering!",
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     
 
     // Send email to admin
-    const adminMail = await transporter.sendMail({
+    await transporter.sendMail({
       from: `"Your App" <${process.env.SMTP_USER}>`,
       to: "ahmadyounas2k18@gmail.com",
       subject: "New user registration",

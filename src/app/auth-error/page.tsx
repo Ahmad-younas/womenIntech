@@ -11,7 +11,7 @@ export default function AuthError() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  
+
   const errorCode = searchParams.get("error_code");
   const errorDescription = searchParams.get("error_description");
   const error = searchParams.get("error");
@@ -25,22 +25,22 @@ export default function AuthError() {
 
   const resendVerificationEmail = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email) {
       setMessage("Please enter your email address");
       return;
     }
-    
+
     setStatus("loading");
     try {
       // Get the site URL for redirection
-      const redirectTo = typeof window !== 'undefined' 
-        ? `${window.location.origin}/auth/callback` 
-        : process.env.NEXT_PUBLIC_SITE_URL 
-          ? `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback` 
+      const redirectTo = typeof window !== 'undefined'
+        ? `${window.location.origin}/auth/callback`
+        : process.env.NEXT_PUBLIC_SITE_URL
+          ? `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
           : 'http://localhost:3000/auth/callback';
-      
-      const { data, error } = await supabase.auth.resend({
+
+      const { error } = await supabase.auth.resend({
         type: 'signup',
         email: email,
         options: {
@@ -66,7 +66,7 @@ export default function AuthError() {
   return (
     <main className="flex flex-col min-h-screen">
       <Header />
-      
+
       <div className="flex flex-col items-center justify-center bg-gray-50 py-16 px-4 flex-grow">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full border border-gray-200 text-center">
           <div className="mb-6 flex justify-center">
@@ -84,15 +84,15 @@ export default function AuthError() {
               </div>
             )}
           </div>
-          
+
           <h1 className="text-3xl font-bold text-[#4e2a5a] mb-4">
             {status === "success" ? "Verification Email Sent" : "Authentication Error"}
           </h1>
-          
+
           <p className="text-gray-600 mb-6">
             {errorDescription || message || "An authentication error occurred"}
           </p>
-          
+
           {status !== "success" && errorCode === "otp_expired" && (
             <form onSubmit={resendVerificationEmail} className="space-y-4 mb-6">
               <div>
@@ -110,7 +110,7 @@ export default function AuthError() {
                   placeholder="Enter your email"
                 />
               </div>
-              
+
               <button
                 type="submit"
                 disabled={status === "loading"}
@@ -120,15 +120,15 @@ export default function AuthError() {
               </button>
             </form>
           )}
-          
+
           <div className="flex flex-col space-y-4">
-            <Link 
-              href="/login" 
+            <Link
+              href="/login"
               className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#4eb1ba] hover:bg-[#3a868d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4e2a5a] flex justify-center"
             >
               Return to Login
             </Link>
-            
+
             <Link
               href="/"
               className="text-[#4eb1ba] hover:text-[#4e2a5a] font-medium"

@@ -1,9 +1,6 @@
 "use client"
 import React, { useState, useRef } from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { registerUser, uploadProfileImage } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import Header from "@/components/Header";
 import PhoneInput from "react-phone-input-2";
@@ -12,7 +9,6 @@ import "react-phone-input-2/lib/style.css";
 import UserProtectedRoute from "@/components/UserProtectedRoutes";
 import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
-import Email from "next-auth/providers/email";
 
 type SessionData = {
     data: Session | null;
@@ -40,7 +36,6 @@ interface Country {
 }
 
 export default function ProfileForm() {
-    const router = useRouter();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { data: session, status } = useSession() as SessionData;
     const [profileImage, setProfileImage] = useState<File | null>(null);

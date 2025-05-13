@@ -30,8 +30,8 @@ declare module "next-auth/jwt" {
   /**
    * Extend the built-in JWT token interface with custom fields
    */
-  interface JWT {
-    userId: string;
-    role: string;
-  }
+  // interface JWT {
+  //   userId: string;
+  //   role: string;
+  // }
 } 
