@@ -8,14 +8,6 @@ import { supabase } from "@/lib/supabase";
 import Header from "@/components/Header";
 import "react-phone-input-2/lib/style.css";
 
-interface UserRegistrationData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
 
 export default function Register() {
   const router = useRouter();
@@ -118,9 +110,9 @@ export default function Register() {
 
       // Registration successful
       router.push("/registration-success");
-    } catch (err: any) {
+    } catch (err) {
       console.error("Registration error:", err);
-      setError(err.message || "An error occurred during registration. Please try again.");
+      setError("An error occurred during registration. Please try again.");
     } finally {
       setLoading(false);
     }

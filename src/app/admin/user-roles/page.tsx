@@ -102,8 +102,8 @@ export default function UserRolesAdmin() {
         // Recheck database
         checkDatabase();
       }
-    } catch (error: any) {
-      setFixStatus(`Error: ${error.message}`);
+    } catch (error) {
+      setFixStatus(`Error: ${error}`);
     }
   }
 
@@ -116,8 +116,8 @@ export default function UserRolesAdmin() {
       } else {
         alert(`Failed to fix role: ${result.error}`);
       }
-    } catch (error: any) {
-      alert(`Error: ${error.message}`);
+    } catch (error) {
+      alert(`Error: ${error}`);
     }
   }
 

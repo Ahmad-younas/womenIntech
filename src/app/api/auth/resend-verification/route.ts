@@ -41,12 +41,12 @@ export async function POST(request: Request) {
       message: 'Verification email sent successfully' 
     });
     
-  } catch (error: any) {
+  } catch (error) {
     console.error('Exception in resend verification:', error);
     return NextResponse.json(
       { 
         success: false, 
-        message: error.message || 'An unexpected error occurred' 
+        message: error || 'An unexpected error occurred' 
       },
       { status: 500 }
     );

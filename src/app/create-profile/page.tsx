@@ -165,9 +165,9 @@ export default function ProfileForm() {
             console.log("response", response);
 
             //router.push("/registration-success");
-        } catch (err: any) {
+        } catch (err) {
             console.error("Registration error:", err);
-            setError(err.message || "An error occurred during registration. Please try again.");
+            setError("An error occurred during registration. Please try again.");
         } finally {
             setLoading(false);
         }
