@@ -2,13 +2,10 @@
 
 import React, { useState, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { registerUser, uploadProfileImage } from "@/lib/auth";
+import { registerUser } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import Header from "@/components/Header";
-import PhoneInput from "react-phone-input-2";
-import countries from "world-countries";
 import "react-phone-input-2/lib/style.css";
 
 interface UserRegistrationData {
@@ -72,27 +69,6 @@ export default function Register() {
     }
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const triggerFileInput = () => {
-    fileInputRef.current?.click();
-  };
-
-  const removeImage = () => {
-    setProfileImage(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-  };
 
   const validateForm = () => {
     // Password validation
@@ -117,13 +93,6 @@ export default function Register() {
     }
 
     return true;
-  };
-
-  const handlePhoneChange = (value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      phone: value
-    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -155,8 +124,6 @@ export default function Register() {
         profileImage: profileImage || undefined
       };
 
-      console.log("registrationData", registrationData);
-
       // Upload profile image if one exists
       if (profileImage) {
         registrationData.profileImage = profileImage;
@@ -168,7 +135,6 @@ export default function Register() {
         password: formData.password,
       });
 
-      console.log("existingUser", existingUser);
 
       if (existingUser.user != null) {
         // User is already registered, handle the error here

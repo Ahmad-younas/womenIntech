@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase';
 
 // This is a simple test API route to verify Supabase authentication
 // DO NOT USE IN PRODUCTION - FOR DEBUGGING ONLY
-export async function GET(request: Request) {
+export async function GET() {
   try {
     // Check Supabase connection
     const configInfo = {
@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     };
     
     // Test Supabase connection
-    const { data: testData, error: testError } = await supabase
+    const {  error: testError } = await supabase
       .from('user_roles')
       .select('*')
       .limit(1);

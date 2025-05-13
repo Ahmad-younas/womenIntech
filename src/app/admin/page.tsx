@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import AdminProtectedRoute from "../../components/AdminProtectedRoute";
 import { supabase } from "@/lib/supabase";
@@ -26,7 +25,6 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [filter, setFilter] = useState("all");
   const [selectedUser, setSelectedUser] = useState<any>(null);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -44,7 +42,9 @@ export default function AdminDashboard() {
     fetchUsers();
   }, []);
 
-  console.log(users)
+
+
+
 
   // Filter users based on selected filter
   const filteredUsers = filter === "all"
@@ -52,7 +52,7 @@ export default function AdminDashboard() {
     : users.filter(user => user.status === filter);
 
   // Handle approving a user
-  const handleApprove = async (userId: String) => {
+  const handleApprove = async (userId: string) => {
     const user = users.find((u) => u.id === userId); // ✅ get the right user
     if (!user) return;
 
@@ -83,7 +83,6 @@ export default function AdminDashboard() {
         body: JSON.stringify({ email: user.email, first_name: user.first_name }),
       });
       console.log("Approval email sent.");
-      console.log("response", response);
     } catch (err) {
       console.error("Failed to send email:", err);
     }
@@ -91,7 +90,7 @@ export default function AdminDashboard() {
   };
 
   // Handle rejecting a user
-  const handleReject = (userId: String) => {
+  const handleReject = (userId: string) => {
     setUsers(prevUsers =>
       prevUsers.map(user =>
         user.id === userId ? { ...user, status: "rejected" } : user
@@ -104,9 +103,7 @@ export default function AdminDashboard() {
 
   // Format date for display
   const formatDate = (dateString: string) => {
-    console.log("formatDate", dateString);
     const date = new Date(dateString);
-    console.log("date", date);
     return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
       month: 'long',

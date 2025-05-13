@@ -26,7 +26,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 (async () => {
   try {
     // Simple health check with version info
-    const { data, error } = await supabase.from('user_roles').select('role').limit(1);
+    const { error } = await supabase.from('user_roles').select('role').limit(1);
     if (error) {
       console.error('Supabase connection test failed:', error);
     } else {

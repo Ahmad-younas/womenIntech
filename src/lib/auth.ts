@@ -69,7 +69,7 @@ export async function uploadProfileImage(userId: string, imageFile: string) {
     const filename = `profile-${userId}-${Date.now()}.png`;
     
     // Upload to Supabase Storage
-    const { data, error } = await supabase
+    const {  error } = await supabase
       .storage
       .from('profile-images')
       .upload(filename, buffer, {
@@ -106,7 +106,7 @@ export async function createUserRole(userId: string, role: string = 'user') {
     console.log(`Creating user role: ${role} for user: ${userId}`);
     
     // Try to use the server-side function first (bypasses RLS)
-    const { data, error } = await supabase.rpc('set_user_role', {
+    const {  error } = await supabase.rpc('set_user_role', {
       user_uuid: userId,
       role_name: role
     });

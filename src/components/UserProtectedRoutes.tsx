@@ -2,7 +2,7 @@
 
 import { useEffect, ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 
 type SessionData = {

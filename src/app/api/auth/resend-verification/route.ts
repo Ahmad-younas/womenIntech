@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     const redirectTo = `${siteUrl}/auth/callback`;
 
     // Send email verification using Supabase with redirect URL
-    const { data, error } = await supabase.auth.resend({
+    const {  error } = await supabase.auth.resend({
       type: 'signup',
       email: email,
       options: {

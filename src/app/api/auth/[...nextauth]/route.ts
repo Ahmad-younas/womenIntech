@@ -13,14 +13,13 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           console.error("Missing credentials");
           return null;
         }
 
         try {
-          console.log("credentials", credentials);
           // Authenticate user with Supabase
           const { data, error } = await supabase.auth.signInWithPassword({
             email: credentials.email,
