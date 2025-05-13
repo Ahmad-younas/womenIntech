@@ -3,9 +3,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --primary: #4e2a5a; /* Purple */
-  --secondary: #4eb1ba; /* Teal */
-  --accent: #f59e0b; /* Yellow/Orange */
+  --primary: #4e2a5a; 
+  --secondary: #4eb1ba; 
+  --accent: #f59e0b; 
 }
 
 @theme inline {
