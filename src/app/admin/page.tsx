@@ -24,7 +24,7 @@ type UserProfile = {
 export default function AdminDashboard() {
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [filter, setFilter] = useState("all");
-  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [selectedUser, setSelectedUser] = useState<UserProfile>();
 
   useEffect(() => {
     const fetchUsers = async () => {

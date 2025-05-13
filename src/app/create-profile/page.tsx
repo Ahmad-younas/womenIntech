@@ -37,7 +37,7 @@ interface Country {
 
 export default function ProfileForm() {
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const { data: session, status } = useSession() as SessionData;
+    const { data: session } = useSession() as SessionData;
     const [profileImage, setProfileImage] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
@@ -116,7 +116,7 @@ export default function ProfileForm() {
                 const fileName = `${Math.random()}.${fileExt}`;
                 const filePath = `${fileName}`
 
-                const { data: uploadData, error: uploadError } = await supabase.storage
+                const { error: uploadError } = await supabase.storage
                     .from("profile-images")
                     .upload(filePath, profileImage);
 

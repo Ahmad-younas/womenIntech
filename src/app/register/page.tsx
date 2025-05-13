@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/lib/auth";
@@ -93,17 +93,6 @@ export default function Register() {
     setLoading(true);
 
     try {
-      // Register the user
-      const registrationData: UserRegistrationData = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        password: formData.password,
-        confirmPassword: formData.confirmPassword,
-      };
-
-
-
       const { data: existingUser } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
