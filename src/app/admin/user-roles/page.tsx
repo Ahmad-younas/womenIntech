@@ -7,17 +7,24 @@ import { createUserRole } from "@/lib/auth";
 import AdminProtectedRoute from "@/components/AdminProtectedRoute";
 import Header from "@/components/Header";
 
+type AdminUser = {
+  id: string;
+  email: string | null;
+  role: string;
+};
+
 export default function UserRolesAdmin() {
   const [databaseStatus, setDatabaseStatus] = useState<string>("Checking...");
   const [fixStatus, setFixStatus] = useState<string>("");
-  const [users, setUsers] = useState<any[]>([]);
+  const [users, setUsers] = useState<AdminUser[]>([]);
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
+
 
   useEffect(() => {
     checkDatabase();
     loadUsers();
-  }, []);
+  }, [loadUsers]);
 
   async function checkDatabase() {
     try {
@@ -38,10 +45,11 @@ export default function UserRolesAdmin() {
       } else {
         setDatabaseStatus("OK: Database schema looks correct");
       }
-    } catch (error: any) {
-      setDatabaseStatus(`Error checking database: ${error.message}`);
+    } catch (error) {
+      setDatabaseStatus(`Error checking database: ${error}`);
     }
   }
+
 
   async function loadUsers() {
     try {
@@ -62,11 +70,13 @@ export default function UserRolesAdmin() {
         }
       } else if (authUsers) {
         console.log("authuser", authUsers);
-        setUsers(authUsers.users.map(user => ({
-          id: user.id,
-          email: user.email,
-          role: user.user_metadata?.role || "Not assigned"
-        })));
+        setUsers(
+          authUsers.users.map((user) => ({
+            id: user.id,
+            email: user.email ?? null,
+            role: user.user_metadata?.role || "Not assigned",
+          }))
+        );
       }
     } catch (error) {
       console.error("Error loading users:", error);

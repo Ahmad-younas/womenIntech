@@ -30,11 +30,11 @@ export async function GET() {
       authSession: session ? 'Active' : 'None',
       timestamp: new Date().toISOString()
     });
-  } catch (error: any) {
+  } catch (error) {
     return NextResponse.json(
       {
         status: 'error',
-        message: error.message || 'An error occurred',
+        message: error || 'An error occurred',
         timestamp: new Date().toISOString()
       },
       { status: 500 }
