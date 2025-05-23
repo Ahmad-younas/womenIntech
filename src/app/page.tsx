@@ -143,7 +143,7 @@ export default function Home() {
                   <span className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#4eb1ba] to-[#4e2a5a] blur-sm opacity-60"></span>
                   <Image
                     src="/picofme.png"
-                    alt="Anna Radulovski"
+                    alt="Anum Butt Tariq"
                     width={150}
                     height={150}
                     className="relative rounded-full border-4 border-white shadow-2xl z-10"
@@ -157,7 +157,7 @@ export default function Home() {
                 </p>
                 <p className="text-base font-semibold">
                   <span className="inline-block bg-gradient-to-r from-[#4eb1ba] to-[#4e2a5a] text-white px-3 py-1 rounded-full animate-bounce">
-                    Anna Radulovski
+                    Anum Butt Tariq
                   </span>
                   <span className="text-[#4e2a5a] ml-2">, CEO & Founder at Coding Girls & WomenTech Network</span>
                 </p>
