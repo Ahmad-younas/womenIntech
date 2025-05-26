@@ -24,7 +24,7 @@ export async function registerUser(
       password,
       options: {
         data: {
-          role:"admin"
+          role:"user"
         },
         emailRedirectTo: redirectTo
       }
@@ -39,7 +39,7 @@ export async function registerUser(
     }
 
     // Add user to the user_roles table with default 'user' role using our new function
-    await createUserRole(authData.user.id, 'admin');
+    await createUserRole(authData.user.id, 'user');
 
     return { 
       success: true, 
