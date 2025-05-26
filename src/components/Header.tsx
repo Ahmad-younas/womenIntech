@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { Session } from "next-auth";
+import { useState } from "react";
 
 type SessionData = {
   data: Session | null;
@@ -12,6 +13,20 @@ type SessionData = {
 export default function Header({ activePage = "" }: { activePage?: string }) {
   const { data: session } = useSession() as SessionData;
   const isAdmin = session?.user?.role === "admin";
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      await signOut({ 
+        redirect: true,
+        callbackUrl: "/" // Redirect to home page after logout
+      });
+    } catch (error) {
+      console.error("Logout error:", error);
+      setIsLoggingOut(false);
+    }
+  };
 
   return (
     <>
@@ -31,12 +46,23 @@ export default function Header({ activePage = "" }: { activePage?: string }) {
           </Link>
         )}
         {session ? (
-          <Link 
-            href="/api/auth/signout"
-            className={activePage === "profile" ? "font-bold underline" : ""}
+          <button 
+            onClick={handleLogout}
+            disabled={isLoggingOut}
+            className={`${activePage === "profile" ? "font-bold underline" : ""} ${isLoggingOut ? "opacity-50 cursor-not-allowed" : "hover:underline"} flex items-center`}
           >
-            Log out
-          </Link>
+            {isLoggingOut ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Logging out...
+              </>
+            ) : (
+              "Log out"
+            )}
+          </button>
         ) : (
           <Link 
             href="/login"
