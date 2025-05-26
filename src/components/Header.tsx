@@ -31,7 +31,7 @@ export default function Header({ activePage = "" }: { activePage?: string }) {
           </Link>
         )}
         <Link 
-          href="/membership" 
+          href="/create-profile" 
           className={`mr-4 ${activePage === "membership" ? "font-bold underline" : ""}`}
         >
           Membership
