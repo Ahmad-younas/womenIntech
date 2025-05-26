@@ -30,12 +30,6 @@ export default function Header({ activePage = "" }: { activePage?: string }) {
             Admin Dashboard
           </Link>
         )}
-        <Link 
-          href="/create-profile" 
-          className={`mr-4 ${activePage === "membership" ? "font-bold underline" : ""}`}
-        >
-          Membership
-        </Link>
         {session ? (
           <Link 
             href="/api/auth/signout"
@@ -71,12 +65,16 @@ export default function Header({ activePage = "" }: { activePage?: string }) {
             <Link href="/awards" className="text-gray-700 hover:text-[#4eb1ba]">
               Global Awards
             </Link>
+            
             <Link href="/100women" className="text-gray-700 hover:text-[#4eb1ba]">
               100 Women in Tech
             </Link>
-            <Link href="/career" className="text-gray-700 hover:text-[#4eb1ba]">
-              Career & Jobs
-            </Link>
+            <Link 
+          href="/create-profile" 
+           className="text-gray-700 hover:text-[#4eb1ba]"
+        >
+          Membership
+        </Link>
             <Link href="/events" className="text-gray-700 hover:text-[#4eb1ba]">
               Events
             </Link>
