@@ -9,6 +9,8 @@ import { supabase } from './supabase';
 export async function registerUser(
   email: string, 
   password: string, 
+  firstName: string,
+  lastName: string
 ) {
   try {
     // Get the site URL for redirection
@@ -24,7 +26,9 @@ export async function registerUser(
       password,
       options: {
         data: {
-          role:"user"
+          role:"user",
+          first_name: firstName,
+          last_name: lastName
         },
         emailRedirectTo: redirectTo
       }

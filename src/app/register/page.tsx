@@ -22,7 +22,7 @@ export default function Register() {
     phone: "",
     country: "",
     organization: "",
-    title: ""
+  title: ""
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -99,7 +99,9 @@ export default function Register() {
       // Register user with Supabase
       const { success, user, error: registrationError } = await registerUser(
         formData.email,
-        formData.password
+        formData.password,
+        formData.firstName,
+        formData.lastName
       );
 
       if (!success || !user) {
@@ -190,6 +192,7 @@ export default function Register() {
               />
             </div>
 
+
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                 Password
@@ -228,6 +231,8 @@ export default function Register() {
                 <p className="mt-1 text-xs text-red-500">{passwordError}</p>
               )}
             </div>
+
+              
 
 
             <div className="flex items-start mt-4">

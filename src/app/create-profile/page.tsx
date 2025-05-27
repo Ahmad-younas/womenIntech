@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import Header from "@/components/Header";
@@ -50,10 +50,37 @@ export default function ProfileForm() {
         phone: "",
         country: "",
         organization: "",
-        title: ""
+        title: "",
+        linkedinUrl: ""
     });
 
     const userid = session?.user?.id;
+
+    // Update form data when session is available
+    useEffect(() => {
+        if (session?.user) {
+            const user = session.user;
+            console.log("user", user);
+            
+            // Extract first and last name from the user's name
+            let firstName = "";
+            let lastName = "";
+            
+            if (user.name) {
+                console.log("user.name", user.name);
+                const nameParts = user.name.trim().split(" ");
+                firstName = nameParts[0] || "";
+                lastName = nameParts.slice(1).join(" ") || "";
+            }
+
+            setFormData(prev => ({
+                ...prev,
+                firstName: firstName,
+                lastName: lastName,
+                email: user.email || "",
+            }));
+        }
+    }, [session]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -87,6 +114,41 @@ export default function ProfileForm() {
         e.preventDefault();
         setError(null);
 
+        // Validate required fields
+        if (!profileImage) {
+            setError("Profile image is required.");
+            return;
+        }
+
+        if (!formData.bio.trim()) {
+            setError("Bio is required.");
+            return;
+        }
+
+        if (!formData.phone.trim()) {
+            setError("Phone number is required.");
+            return;
+        }
+
+        if (!formData.country.trim()) {
+            setError("Country is required.");
+            return;
+        }
+
+        if (!formData.organization.trim()) {
+            setError("Organization is required.");
+            return;
+        }
+
+        if (!formData.title.trim()) {
+            setError("Title is required.");
+            return;
+        }
+
+        if (!formData.linkedinUrl.trim()) {
+            setError("LinkedIn profile URL is required.");
+            return;
+        }
 
         setLoading(true);
 
@@ -241,13 +303,14 @@ export default function ProfileForm() {
                                 onChange={handleImageUpload}
                                 accept="image/*"
                                 className="hidden"
+                                required
                             />
                             <button
                                 type="button"
                                 onClick={triggerFileInput}
                                 className="text-sm font-medium text-[#4eb1ba] hover:text-[#4e2a5a]"
                             >
-                                {profileImage ? "Change profile picture" : "Upload profile picture"}
+                                {profileImage ? "Change profile picture" : "Upload profile picture *"}
                             </button>
                         </div>
 
@@ -255,7 +318,7 @@ export default function ProfileForm() {
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                                        First Name
+                                        First Name <span className="text-red-500">*</span>
                                     </label>
                                     <input
                                         id="firstName"
@@ -265,13 +328,15 @@ export default function ProfileForm() {
                                         required
                                         value={formData.firstName}
                                         onChange={handleChange}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba]"
+                                        readOnly
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba] bg-gray-50 cursor-not-allowed"
                                     />
+                                    <p className="text-xs text-gray-500 mt-1">From your account profile</p>
                                 </div>
 
                                 <div>
                                     <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Last Name
+                                        Last Name <span className="text-red-500">*</span>
                                     </label>
                                     <input
                                         id="lastName"
@@ -281,14 +346,16 @@ export default function ProfileForm() {
                                         required
                                         value={formData.lastName}
                                         onChange={handleChange}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba]"
+                                        readOnly
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba] bg-gray-50 cursor-not-allowed"
                                     />
+                                    <p className="text-xs text-gray-500 mt-1">From your account profile</p>
                                 </div>
                             </div>
 
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                    Email Address
+                                    Email Address <span className="text-red-500">*</span>
                                 </label>
                                 <input
                                     id="email"
@@ -298,24 +365,57 @@ export default function ProfileForm() {
                                     required
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba]"
+                                    readOnly
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba] bg-gray-50 cursor-not-allowed"
                                     placeholder="you@example.com"
+                                />
+                                <p className="text-xs text-gray-500 mt-1">From your account profile</p>
+                            </div>
+
+                            <div>
+                                <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Bio <span className="text-red-500">*</span>
+                                </label>
+                                <textarea 
+                                    id="bio" 
+                                    name="bio" 
+                                    value={formData.bio} 
+                                    onChange={handleChange} 
+                                    rows={3} 
+                                    required
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba]" 
+                                    placeholder="Tell us about yourself..."
                                 />
                             </div>
 
                             <div>
-                                <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
-                                <textarea id="bio" name="bio" value={formData.bio} onChange={handleChange} rows={3} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" />
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Phone Number <span className="text-red-500">*</span>
+                                </label>
+                                <PhoneInput 
+                                    country="us" 
+                                    value={formData.phone} 
+                                    areaCodes={["1"]} 
+                                    autoFormat={true} 
+                                    onChange={handlePhoneChange} 
+                                    containerStyle={{ border: "1px solid #e0e0e0", borderRadius: "4px", padding: "8px" }}
+                                    inputProps={{
+                                        required: true
+                                    }}
+                                />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                                <PhoneInput country="us" value={formData.phone} areaCodes={["1"]} autoFormat={true} onChange={handlePhoneChange} containerStyle={{ border: "1px solid #e0e0e0", borderRadius: "4px", padding: "8px" }} />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Country</label>
-                                <select name="country" value={formData.country} onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba]">
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Country <span className="text-red-500">*</span>
+                                </label>
+                                <select 
+                                    name="country" 
+                                    value={formData.country} 
+                                    onChange={handleChange} 
+                                    required
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba]"
+                                >
                                     <option value="">Select your country</option>
                                     {(countries as Country[]).map(c => (
                                         <option key={c.cca2} value={c.name.common}>{c.name.common}</option>
@@ -324,13 +424,47 @@ export default function ProfileForm() {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Organization</label>
-                                <input name="organization" value={formData.organization} onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba]" placeholder="e.g. Google" />
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Organization <span className="text-red-500">*</span>
+                                </label>
+                                <input 
+                                    name="organization" 
+                                    value={formData.organization} 
+                                    onChange={handleChange} 
+                                    required
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba]" 
+                                    placeholder="e.g. Google" 
+                                />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                                <input name="title" value={formData.title} onChange={handleChange} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba]" placeholder="e.g. Software Engineer" />
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Title <span className="text-red-500">*</span>
+                                </label>
+                                <input 
+                                    name="title" 
+                                    value={formData.title} 
+                                    onChange={handleChange} 
+                                    required
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba]" 
+                                    placeholder="e.g. Software Engineer" 
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="linkedinUrl" className="block text-sm font-medium text-gray-700 mb-1">
+                                    LinkedIn Profile URL <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    id="linkedinUrl"
+                                    name="linkedinUrl"
+                                    type="url"
+                                    value={formData.linkedinUrl}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4eb1ba] focus:border-[#4eb1ba]"
+                                    placeholder="https://linkedin.com/in/yourprofile"
+                                />
                             </div>
 
                             <div className="mt-6">
