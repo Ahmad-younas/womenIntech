@@ -196,6 +196,8 @@ export default function AdminDashboard() {
                             <Image
                               className="h-10 w-10 rounded-full object-cover"
                               src={user.profile_image}
+                              width={40}
+                              height={40}
                               alt={`${user.first_name} ${user.last_name}`}
                             />
                           </div>
@@ -252,6 +254,8 @@ export default function AdminDashboard() {
                             className="h-32 w-32 rounded-full object-cover border-4 border-[#4eb1ba]/20"
                             src={selectedUser.profile_image}
                             alt={`${selectedUser.first_name} ${selectedUser.last_name}`}
+                            width={128}
+                            height={128}
                           />
                         </div>
                         <div>

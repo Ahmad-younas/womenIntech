@@ -11,7 +11,11 @@
   "dependencies": {
     "@auth/supabase-adapter": "^1.9.0",
     "@supabase/supabase-js": "^2.49.4",
+    "@types/html2canvas": "^1.0.0",
     "@types/react-select-country-list": "^2.2.3",
+    "canvas": "^3.1.0",
+    "dom-to-image": "^2.6.0",
+    "html2canvas": "^1.4.1",
     "next": "15.3.1",
     "next-auth": "^4.24.11",
     "nodemailer": "^6.10.1",
@@ -22,11 +26,13 @@
     "react-select": "^5.10.1",
     "react-select-country-list": "^2.2.3",
     "resend": "^4.5.1",
+    "sharp": "^0.34.2",
     "world-countries": "^5.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/dom-to-image": "^2.6.7",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^19",
