@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       'dxlyawszcpeibmkvnwry.supabase.co', // Supabase storage domain
+      'images.unsplash.com', // Add Unsplash domain
     ],
   },
   /* config options here */
