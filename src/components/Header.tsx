@@ -68,7 +68,7 @@ export default function Header({ activePage = "" }: { activePage?: string }) {
             href="/login"
             className={activePage === "login" ? "font-bold underline" : ""}
           >
-            Log in
+            Join The Movement
           </Link>
         )}
       </div>

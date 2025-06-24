@@ -51,30 +51,30 @@ export default function Home() {
   const [currentEvent, setCurrentEvent] = useState(0);
   const upcomingEvents = [
     {
-      title: "Women in AI Summit 2025",
-      speaker: "Dr. Emily Watson",
-      date: "March 15, 2025",
+      title: "Breaking Barriers: Building Global Tech Careers",
+      speaker: "Anum Butt",
+      date: "Augest 9, 2025",
       time: "10:00 AM PST",
       image: "/event1.jpg"
     },
     {
-      title: "Leadership in Tech Workshop",
-      speaker: "Sarah Mitchell",
-      date: "March 22, 2025", 
+      title: "Future of AI: Shaping the Industry",
+      speaker: "Anum Butt",
+      date: "Augest 16, 2025", 
       time: "2:00 PM PST",
       image: "/event2.jpg"
     },
-    {
-      title: "Cybersecurity for Women",
-      speaker: "Jessica Chen",
-      date: "March 29, 2025",
+    { 
+      title: "LeaderShip Journey: Navigating the Tech Industry",
+      speaker: "Anum Butt",
+      date: "Augest 23, 2025",
       time: "11:00 AM PST", 
       image: "/event3.jpg"
     },
     {
       title: "Product Management Masterclass",
-      speaker: "Maria Rodriguez",
-      date: "April 5, 2025",
+      speaker: "Anum Butt",
+      date: "Augest 30, 2025",
       time: "1:00 PM PST",
       image: "/event4.jpg"
     }
@@ -237,7 +237,7 @@ export default function Home() {
                 <div className="relative">
                   <span className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#6b3d6b] to-[#4e2a5a] blur-sm opacity-60"></span>
                   <Image
-                    src="/picofme.png"
+                    src="/images/anumButt.jpg"
                     alt="Anum Butt Tariq"
                     width={150}
                     height={150}
@@ -248,13 +248,13 @@ export default function Home() {
               {/* Glassmorphism Quote Card */}
               <div className="flex-1 text-center md:text-left">
                 <p className="italic text-xl text-gray-800 mb-6 font-medium">
-                  "Join us on a mission to inspire <span className="text-[#6b3d6b] font-bold">5 000 000</span> women, minorities and their allies in science and engineering by 2025."
+                  "TechSHEroes is on a bold mission to empower <span className="text-[#6b3d6b] font-bold">15 million</span> women, non-binary talent, and allies worldwide, unlocking pathways in tech leadership, innovation, and impact by 2030."
                 </p>
                 <p className="text-base font-semibold">
                   <span className="inline-block bg-gradient-to-r from-[#6b3d6b] to-[#4e2a5a] text-white px-3 py-1 rounded-full animate-bounce">
                     Anum Butt Tariq
                   </span>
-                  <span className="text-[#4e2a5a] ml-2">, CEO & Founder at Coding Girls & WomenTech Network</span>
+                  <span className="text-[#4e2a5a] ml-2">– Anum Tariq Butt, Founder & Visionary, TechSHEroes</span>
                 </p>
               </div>
             </div>
