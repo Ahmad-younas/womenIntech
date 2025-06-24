@@ -18,6 +18,100 @@ export default function Home() {
   const [foundingMembers, setFoundingMembers] = useState<any[]>([]);
   const [loadingMembers, setLoadingMembers] = useState(true);
 
+  // Dummy founding members data
+  const dummyMembers = [
+    {
+      id: 1,
+      first_name: "Sarah",
+      last_name: "Johnson",
+      country: "United States",
+      title: "Senior Software Engineer",
+      profile_image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      linkedin: "https://linkedin.com/in/sarah-johnson"
+    },
+    {
+      id: 2,
+      first_name: "Maria",
+      last_name: "Rodriguez",
+      country: "Spain",
+      title: "Product Manager",
+      profile_image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      linkedin: "https://linkedin.com/in/maria-rodriguez"
+    },
+    {
+      id: 3,
+      first_name: "Aisha",
+      last_name: "Patel",
+      country: "India",
+      title: "Data Scientist",
+      profile_image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+      linkedin: "https://linkedin.com/in/aisha-patel"
+    },
+    {
+      id: 4,
+      first_name: "Lisa",
+      last_name: "Chen",
+      country: "Canada",
+      title: "UX Designer",
+      profile_image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
+      linkedin: "https://linkedin.com/in/lisa-chen"
+    },
+    {
+      id: 5,
+      first_name: "Emma",
+      last_name: "Wilson",
+      country: "United Kingdom",
+      title: "DevOps Engineer",
+      profile_image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      linkedin: "https://linkedin.com/in/emma-wilson"
+    },
+    {
+      id: 6,
+      first_name: "Fatima",
+      last_name: "Al-Zahra",
+      country: "UAE",
+      title: "Cybersecurity Specialist",
+      profile_image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
+      linkedin: "https://linkedin.com/in/fatima-alzahra"
+    },
+    {
+      id: 7,
+      first_name: "Yuki",
+      last_name: "Tanaka",
+      country: "Japan",
+      title: "Machine Learning Engineer",
+      profile_image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      linkedin: "https://linkedin.com/in/yuki-tanaka"
+    },
+    {
+      id: 8,
+      first_name: "Sofia",
+      last_name: "Silva",
+      country: "Brazil",
+      title: "Full Stack Developer",
+      profile_image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face",
+      linkedin: "https://linkedin.com/in/sofia-silva"
+    },
+    {
+      id: 9,
+      first_name: "Zara",
+      last_name: "Ahmed",
+      country: "Pakistan",
+      title: "Cloud Architect",
+      profile_image: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face",
+      linkedin: "https://linkedin.com/in/zara-ahmed"
+    },
+    {
+      id: 10,
+      first_name: "Nina",
+      last_name: "Kovac",
+      country: "Slovenia",
+      title: "Technical Lead",
+      profile_image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      linkedin: "https://linkedin.com/in/nina-kovac"
+    }
+  ];
+
   // Testimonials carousel state
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const testimonials = [
@@ -122,8 +216,11 @@ export default function Home() {
         .eq("status", "approved");
 
       console.log("data",data);
-      if (!error && data) {
+      if (!error && data && data.length > 0) {
         setFoundingMembers(data);
+      } else {
+        // Use dummy data if no real members found
+        setFoundingMembers(dummyMembers);
       }
       setLoadingMembers(false);
       console.log("error",error);
@@ -220,14 +317,14 @@ export default function Home() {
         {/* Stunning Mission Section */}
         <section className="relative flex flex-col items-center justify-center py-20 overflow-hidden bg-gradient-to-br from-[#6b3d6b]/30 via-[#fff] to-[#4e2a5a]/10">
           {/* Decorative Blobs */}
-          <div className="absolute -top-20 -left-20 w-72 h-72 bg-[#6b3d6b]/30 rounded-full blur-3xl z-0 animate-pulse"></div>
-          <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#4e2a5a]/20 rounded-full blur-3xl z-0 animate-pulse"></div>
+          {/* <div className="absolute -top-20 -left-20 w-72 h-72 bg-[#6b3d6b]/30 rounded-full blur-3xl z-0 animate-pulse"></div> */}
+          {/* <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#4e2a5a]/20 rounded-full blur-3xl z-0 animate-pulse"></div> */}
 
           <div className="relative flex flex-col items-center w-full max-w-3xl px-4 z-10">
             {/* Animated Headline */}
             <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-8 tracking-tight">
               <span className="bg-gradient-to-r from-[#4e2a5a] via-[#6b3d6b] to-[#4e2a5a] bg-clip-text text-transparent drop-shadow-lg animate-pulse">
-                REACH <span className="underline decoration-[#6b3d6b] decoration-8 underline-offset-8">5 000 000</span> WOMEN IN TECHNOLOGY
+                REACH <span >5 000 000</span> WOMEN IN TECHNOLOGY
               </span>
             </h2>
 
@@ -254,7 +351,7 @@ export default function Home() {
                   <span className="inline-block bg-gradient-to-r from-[#6b3d6b] to-[#4e2a5a] text-white px-3 py-1 rounded-full animate-bounce">
                     Anum Butt Tariq
                   </span>
-                  <span className="text-[#4e2a5a] ml-2">–, Founder & Visionary, TechSHEroes</span>
+                  <span className="text-[#4e2a5a] ml-2">– Founder & Visionary, TechSHEroes</span>
                 </p>
               </div>
             </div>
@@ -301,7 +398,18 @@ export default function Home() {
                 {foundingMembers.map((member, idx) => (
                   <div key={member.id || idx} className="bg-white rounded-xl shadow-md flex flex-col items-center pt-8 pb-6 px-4 transition hover:shadow-xl">
                     <div className="w-24 h-24 rounded-full bg-[#6b3d6b] flex items-center justify-center mb-4 overflow-hidden border-4 border-white shadow-lg">
-                      <Image src={member.profile_image || "/default-profile.png"} alt={member.first_name + ' ' + member.last_name} width={96} height={96} className="object-cover w-24 h-24 rounded-full" />
+                      <Image 
+                        src={member.profile_image || "/default-profile.png"} 
+                        alt={member.first_name + ' ' + member.last_name} 
+                        width={96} 
+                        height={96} 
+                        className="object-cover w-24 h-24 rounded-full"
+                        onError={(e) => {
+                          // Fallback to default profile image if external image fails
+                          const target = e.target as HTMLImageElement;
+                          target.src = "/default-profile.png";
+                        }}
+                      />
                     </div>
                     <div className="text-lg font-bold text-[#222] text-center">{member.first_name} {member.last_name}</div>
                     <div className="text-sm text-gray-600 font-semibold mb-1 text-center">{member.country}</div>
