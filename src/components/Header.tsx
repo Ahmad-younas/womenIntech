@@ -65,8 +65,8 @@ export default function Header({ activePage = "" }: { activePage?: string }) {
           </button>
         ) : (
           <Link 
-            href="/login"
-            className={activePage === "login" ? "font-bold underline" : ""}
+            href="/register"
+            className={`${activePage === "register" ? "font-bold" : ""} bg-white text-[#4eb1ba] px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition duration-200 shadow-sm`}
           >
             Join The Movement
           </Link>
@@ -77,23 +77,21 @@ export default function Header({ activePage = "" }: { activePage?: string }) {
       <nav className="flex justify-between items-center px-10 py-4 bg-white">
         <Link href="/">
           <div className="flex items-center">
-            <span className="text-[#4e2a5a] text-2xl font-bold">women</span>
-            <span className="text-[#4eb1ba] text-2xl font-bold">tech</span>
-            <span className="text-gray-500 text-2xl font-light ml-2">network</span>
+            <span className="text-[#4e2a5a] text-2xl font-bold">Tech</span>
+            <span className="text-[#4eb1ba] text-2xl font-bold">SHEroes</span>
           </div>
         </Link>
         
         {activePage === "home" && (
           <div className="flex space-x-6">
+            <Link href="/" className="text-gray-700 hover:text-[#4eb1ba]">
+              Home
+            </Link>
             <Link href="/conference" className="text-gray-700 hover:text-[#4eb1ba]">
-              Women in Tech Global Conference 2025
+              Women in Tech
             </Link>
             <Link href="/awards" className="text-gray-700 hover:text-[#4eb1ba]">
-              Global Awards
-            </Link>
-            
-            <Link href="/100women" className="text-gray-700 hover:text-[#4eb1ba]">
-              100 Women in Tech
+              Events
             </Link>
             <Link 
           href="/create-profile" 
@@ -101,15 +99,14 @@ export default function Header({ activePage = "" }: { activePage?: string }) {
         >
           Membership
         </Link>
-            <Link href="/events" className="text-gray-700 hover:text-[#4eb1ba]">
-              Events
-            </Link>
+            
             <Link href="/about" className="text-gray-700 hover:text-[#4eb1ba]">
               About
             </Link>
             <Link href="/resources" className="text-gray-700 hover:text-[#4eb1ba]">
-              Resources
+              Contact
             </Link>
+
           </div>
         )}
       </nav>

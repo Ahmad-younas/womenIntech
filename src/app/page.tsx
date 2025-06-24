@@ -188,7 +188,7 @@ export default function Home() {
           }}></div> */}
 
           <div className="bg-[#4e2a5a]/80 p-4 rounded mb-8 z-10">
-            <h2 className="text-xl mb-1">Women in Tech</h2>
+            <h2 className="text-xl mb-1">TechSHEroes</h2>
             <div className="text-sm bg-[#6b3d6b] inline-block px-2 py-1 rounded">GLOBAL CONFERENCE 2025</div>
           </div>
 
@@ -254,7 +254,7 @@ export default function Home() {
                   <span className="inline-block bg-gradient-to-r from-[#6b3d6b] to-[#4e2a5a] text-white px-3 py-1 rounded-full animate-bounce">
                     Anum Butt Tariq
                   </span>
-                  <span className="text-[#4e2a5a] ml-2">– Anum Tariq Butt, Founder & Visionary, TechSHEroes</span>
+                  <span className="text-[#4e2a5a] ml-2">–, Founder & Visionary, TechSHEroes</span>
                 </p>
               </div>
             </div>
