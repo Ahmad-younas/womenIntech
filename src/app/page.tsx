@@ -149,28 +149,28 @@ export default function Home() {
       speaker: "Anum Butt",
       date: "Augest 9, 2025",
       time: "10:00 AM PST",
-      image: "/event1.jpg"
+      image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=400&h=250&fit=crop"
     },
     {
       title: "Future of AI: Shaping the Industry",
       speaker: "Anum Butt",
       date: "Augest 16, 2025", 
       time: "2:00 PM PST",
-      image: "/event2.jpg"
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=250&fit=crop"
     },
     { 
       title: "LeaderShip Journey: Navigating the Tech Industry",
       speaker: "Anum Butt",
       date: "Augest 23, 2025",
       time: "11:00 AM PST", 
-      image: "/event3.jpg"
+      image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=400&h=250&fit=crop"
     },
     {
       title: "Product Management Masterclass",
       speaker: "Anum Butt",
       date: "Augest 30, 2025",
       time: "1:00 PM PST",
-      image: "/event4.jpg"
+      image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400&h=250&fit=crop"
     }
   ];
 
@@ -462,9 +462,24 @@ export default function Home() {
                   {upcomingEvents.map((event, idx) => (
                     <div key={idx} className="flex-shrink-0 w-1/3 px-3">
                       <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-xl border border-[#4e2a5a]/20 hover:shadow-2xl transition-all duration-300">
-                        <div className="h-40 bg-gradient-to-br from-[#4e2a5a]/20 to-[#6b3d6b]/20 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
-                          <div className="absolute inset-0 bg-gradient-to-br from-[#4e2a5a]/30 to-[#6b3d6b]/30"></div>
-                          <span className="text-[#4e2a5a] font-semibold text-sm relative z-10">Event Image</span>
+                        <div className="h-40 rounded-lg mb-4 relative overflow-hidden">
+                          <Image 
+                            src={event.image} 
+                            alt={event.title}
+                            width={400}
+                            height={250}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              // Fallback to gradient background if image fails
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                              target.parentElement!.innerHTML = `
+                                <div class="absolute inset-0 bg-gradient-to-br from-[#4e2a5a]/20 to-[#6b3d6b]/20 flex items-center justify-center">
+                                  <span class="text-[#4e2a5a] font-semibold text-sm">Event Image</span>
+                                </div>
+                              `;
+                            }}
+                          />
                         </div>
                         <h3 className="text-xl font-bold text-[#4e2a5a] mb-2">{event.title}</h3>
                         <p className="text-gray-700 mb-2 font-medium">{event.speaker}</p>
